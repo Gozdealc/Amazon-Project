@@ -1,7 +1,7 @@
 export const deliveryOptions = 
 [{
     id: '1',
-    deliveryDAys: 7,
+    deliveryDays: 7,
     priceCents: 0
 }, {
     id: '2',
