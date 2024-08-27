@@ -3,6 +3,7 @@ import { products, getProduct } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
+import { renderPaymentSummary } from './paymentSummary.js';
 
 const today = dayjs();
 const deliveryDate = today.add(7, 'days');
@@ -118,7 +119,9 @@ document.querySelectorAll('.js-delete-link')
             const container = document.querySelector(
                 `.js-cart-item-container-${productId}`
             );
-            container.remove();                  
+            container.remove(); 
+            
+            renderPaymentSummary();
     });
 });
 
@@ -129,7 +132,13 @@ document.querySelectorAll('.js-delivery-option')
             // Shorthand Property;
             const {productId, deliveryOptionId} = element.dataset;
             updateDeliveryOption(productId, deliveryOptionId);
-            renderOrderSummary();   // Update the order summary after the delivery option change.  // You may want to add a debounce function to avoid unnecessary updates.  // This is just a basic example.  // In a real-world application, you would likely want to update the delivery date based on the selected delivery option.  // And you might want to update the delivery option price based on the selected product.  // And you might want to update the total price based on the selected product and
+            renderOrderSummary();   // Update the order summary after the delivery option change.  
+            // You may want to add a debounce function to avoid unnecessary updates.  
+            // This is just a basic example.  
+            // In a real-world application, you would likely want to update the delivery date based on the selected delivery option.  
+            // And you might want to update the delivery option price based on the selected product.  
+            // And you might want to update the total price based on the selected product and
+            renderPaymentSummary();
         });
     });
 
